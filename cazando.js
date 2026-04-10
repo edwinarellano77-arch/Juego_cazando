@@ -1,9 +1,5 @@
-let canvas = document.getElementById("juego");
+let canvas = document.getElementById("areaJuego");
 let ctx = canvas.getContext("2d");
-let btnArriba = document.getElementById("btnArriba");
-let btnIzquierda = document.getElementById("btnIzquierda");
-let btnAbajo = document.getElementById("btnAbajo");
-let btnDerecha = document.getElementById("btnDerecha");
 const VELOCIDAD = 15;
 // Gato
 let gatoX = 0;
@@ -11,30 +7,36 @@ let gatoY = 0;
 const ANCHOGATO = 50;
 const ALTURAGATO = 50;
  
-// Raton
-let ratonX = 50;
-let ratonY = 50;
-const ANCHORATON = 30;
-const ALTURARATON = 30;
+// Comida
+let comidaX = 50;
+let comidaY = 50;
+const ANCHOCOMIDA = 30;
+const ALTURACOMIDA = 30;
  
-function graficar(x, y, ancho, alto, color) {
+function graficarRectangulo(x, y, ancho, alto, color) {
     ctx.fillStyle = color;
     ctx.fillRect(x, y, ancho, alto);
 };
  
 function graficarGato() {
-    graficar(gatoX, gatoY, ANCHOGATO, ALTURAGATO, "#000000");
+    graficarRectangulo(gatoX, gatoY, ANCHOGATO, ALTURAGATO, "#000000");
 };
  
-function graficarRaton() {
-    graficar(ratonX, ratonY, ANCHORATON, ALTURARATON, "#ff0000");
+function graficarComida() {
+    graficarRectangulo(comidaX, comidaY, ANCHOCOMIDA, ALTURACOMIDA, "#ff0000");
 };
  
 function iniciarJuego() {
     gatoX = (canvas.width / 2) - (ANCHOGATO / 2);
     gatoY = (canvas.height / 2) - (ALTURAGATO / 2);
+    //COMIDA ESQUINA INFERIOR DERECHA
+    comidaX = canvas.width - ANCHOCOMIDA;
+    comidaY = canvas.height - ALTURACOMIDA;
+ 
+    //ctx.clearRect(0, 0, canvas.width, canvas.height);
     graficarGato();
-    graficarRaton();
+    graficarComida();
+    
 }
  
 function mover(direccion) {
@@ -50,5 +52,3 @@ document.getElementById("btnAbajo").onclick = () => mover("abajo");
 document.getElementById("btnIzquierda").onclick = () => mover("izquierda");
 document.getElementById("btnDerecha").onclick = () => mover("derecha");
  
- 
-iniciarJuego();
