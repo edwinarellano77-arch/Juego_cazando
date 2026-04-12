@@ -1,6 +1,7 @@
 
 let canvas = document.getElementById("areaJuego");
 let ctx = canvas.getContext("2d");
+
  
 // GATO
 let gatox=0;
@@ -14,6 +15,8 @@ let comidax=50;
 let comiday=50;
 const ANCHOCOMIDA=30;
 const ALTURACOMIDA=30;
+// PUNTAJE DE JUEGO
+let puntaje = 0;
  
 //ctx.fillStyle = "#be2222";
  
@@ -105,6 +108,10 @@ document.getElementById("btnDerecha").onclick = () => moverDerecha();
         gatox + ANCHOGATO > comidax && 
         gatoy < comiday + ALTURACOMIDA &&
         gatoy + ALTURAGATO > comiday){
-           alert("Te atrape");
+           comidax = generarAleatorio(0,canvas.width - ANCHOCOMIDA);
+           comiday = generarAleatorio(0,canvas.height - ALTURACOMIDA);
+           puntaje++;
+           mostrarEnSpan("puntos", puntaje);
         }
  }
+
