@@ -17,7 +17,7 @@ const ANCHOCOMIDA=30;
 const ALTURACOMIDA=30;
 // PUNTAJE DE JUEGO
 let puntaje = 0;
- 
+let tiempo=10;
 //ctx.fillStyle = "#be2222";
  
 // FUNCION PRINCIPAL PARA GRAFICAR
@@ -38,6 +38,7 @@ function graficarComida(){
  
 // FUNCION INICIAR JUEGO
 function iniciarJuego(){
+    setInterval(restarTiempo,1000);
     // gato al centro del rectangulo
     gatox = (canvas.width / 2) - (ANCHOGATO / 2);    
     gatoy = (canvas.height / 2) - (ALTURAGATO / 2);
@@ -114,4 +115,9 @@ document.getElementById("btnDerecha").onclick = () => moverDerecha();
            mostrarEnSpan("puntos", puntaje);
         }
  }
+
+function restarTiempo(){
+    tiempo=tiempo-1
+    mostrarEnSpan("tiempo",tiempo);
+}
 
