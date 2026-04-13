@@ -38,7 +38,7 @@ function graficarComida(){
  
 // FUNCION INICIAR JUEGO
 function iniciarJuego(){
-    setInterval(restarTiempo,1000);
+    
     // gato al centro del rectangulo
     gatox = (canvas.width / 2) - (ANCHOGATO / 2);    
     gatoy = (canvas.height / 2) - (ALTURAGATO / 2);
@@ -116,8 +116,34 @@ document.getElementById("btnDerecha").onclick = () => moverDerecha();
         }
  }
 
-function restarTiempo(){
-    tiempo=tiempo-1
-    mostrarEnSpan("tiempo",tiempo);
+function restarTiempo() {
+    let temporizador = setInterval(function () {
+        tiempo--;
+        mostrarEnSpan('tiempo', tiempo);
+
+        if (tiempo <= 0) {
+            alert("Game Over!")
+            clearInterval(temporizador);
+        }
+        if (puntaje >= 6) {
+            alert("¡Ganaste!");
+            clearInterval(temporizador);
+        }
+    }, 1000);
 }
 
+if (!(tiempo <= 0)) {
+    restarTiempo();
+}
+
+function reiniciar() {
+    puntaje = 0;
+    tiempo = 10;
+    mostrarEnSpan('puntos', puntaje);
+    mostrarEnSpan('tiempo', tiempo);
+    limpiarCanva();
+    graficarComida();
+    graficarGato();
+    restarTiempo();
+    iniciarJuego();
+}
