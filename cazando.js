@@ -18,6 +18,7 @@ const ALTURACOMIDA=30;
 // PUNTAJE DE JUEGO
 let puntaje = 0;
 let tiempo=10;
+let temporizador = null;
 //ctx.fillStyle = "#be2222";
  
 // FUNCION PRINCIPAL PARA GRAFICAR
@@ -117,7 +118,7 @@ document.getElementById("btnDerecha").onclick = () => moverDerecha();
  }
 
 function restarTiempo() {
-    let temporizador = setInterval(function () {
+    temporizador = setInterval(function () {
         tiempo--;
         mostrarEnSpan('tiempo', tiempo);
 
@@ -137,13 +138,13 @@ if (!(tiempo <= 0)) {
 }
 
 function reiniciar() {
+    clearInterval(temporizador);
     puntaje = 0;
     tiempo = 10;
     mostrarEnSpan('puntos', puntaje);
     mostrarEnSpan('tiempo', tiempo);
     limpiarCanva();
-    graficarComida();
-    graficarGato();
+    
     restarTiempo();
     iniciarJuego();
 }
