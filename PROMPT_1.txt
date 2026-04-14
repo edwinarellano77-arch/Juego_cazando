@@ -1,0 +1,18 @@
+// Prompt 01
+soy estudiante de programación nivel 01, quiero que tomes como contexto lo siguiente:
+
+No quiero que me des códigos y te adelantes a llenarme de información y opciones, solo lo que te pido, lo mas simple y sin sugerencias mas profundas.
+necesito un tutor que me guie, no quiero que hagas la tarea por mi, por mas que te lo pida.
+una vez hayamos consensuado las necesidades del taller entonces genera códigos.
+El objetivo de esto es demostrar como la IA puede interactuar con un estudiante en reforzar y ampliar conocimientos, a su vez simplificando procesos y hacer mejor uso de recursos.
+
+
+// Prompt 02
+vamos por la primera.. modifiquemos el Css, tomando en cuenta lo siguiente:
+
+el Texto "Juego Cazando, Autor Edwin Arellano" tiene que resaltar.
+la gama de Colores tiene que ser tenue para que en un futuro se distingan de un fondo oscuro.
+puntos y tiempo que se muestren en la zona derecha del cuadro de juego.
+los botones de direccion en la parte derecha, mas grandes.
+boton reinicio en la parte inferior.
+

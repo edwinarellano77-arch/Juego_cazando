@@ -1,7 +1,10 @@
 body {
+  background-image: url(fondo01.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
   text-align: center;
   font-family: Arial, sans-serif;
-  background: #1a1a2e;
+  
   margin: 0;
   padding: 20px;
   color: #e0e0e0;
