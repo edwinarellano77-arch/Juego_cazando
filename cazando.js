@@ -2,6 +2,8 @@ let canvas = document.getElementById("areaJuego");
 let ctx = canvas.getContext("2d");
  
 // GATO
+let imagenGato = new Image();
+imagenGato.src = "GATO.png";
 let gatox = 0;
 let gatoy = 0;
 const ANCHOGATO = 50;
@@ -27,7 +29,7 @@ function graficarRectangulo(x, y, ancho, alto, color) {
  
 // FUNCION PARA GRAFICAR GATO
 function graficarGato() {
-    graficarRectangulo(gatox, gatoy, ANCHOGATO, ALTURAGATO, "#000000");
+    ctx.drawImage(imagenGato, gatox, gatoy, ANCHOGATO, ALTURAGATO);
 }
  
 // FUNCION PARA GRAFICAR COMIDA
