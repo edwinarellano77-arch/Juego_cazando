@@ -1,50 +1,46 @@
-
 let canvas = document.getElementById("areaJuego");
 let ctx = canvas.getContext("2d");
-
  
 // GATO
-let gatox=0;
-let gatoy=0;
-const ANCHOGATO=50;
-const ALTURAGATO=50;
-const VELOCIDAD=15;
+let gatox = 0;
+let gatoy = 0;
+const ANCHOGATO = 50;
+const ALTURAGATO = 50;
  
 // COMIDA
-let comidax=50;
-let comiday=50;
-const ANCHOCOMIDA=30;
-const ALTURACOMIDA=30;
-// PUNTAJE DE JUEGO
+let comidax = 50;
+let comiday = 50;
+const ANCHOCOMIDA = 30;
+const ALTURACOMIDA = 30;
+ 
+// PUNTAJE Y TIEMPO
 let puntaje = 0;
-let tiempo=10;
+let tiempo = 15;
 let temporizador = null;
-//ctx.fillStyle = "#be2222";
  
 // FUNCION PRINCIPAL PARA GRAFICAR
-function graficarRectangulo(x,y,ancho,alto,color){
+function graficarRectangulo(x, y, ancho, alto, color) {
     ctx.fillStyle = color;
-    ctx.fillRect(x,y,ancho,alto);
+    ctx.fillRect(x, y, ancho, alto);
 }
  
 // FUNCION PARA GRAFICAR GATO
-function graficarGato(){    
-    graficarRectangulo(gatox,gatoy,ANCHOGATO,ALTURAGATO,"#000000");
+function graficarGato() {
+    graficarRectangulo(gatox, gatoy, ANCHOGATO, ALTURAGATO, "#000000");
 }
  
 // FUNCION PARA GRAFICAR COMIDA
-function graficarComida(){
-    graficarRectangulo(comidax,comiday,ANCHOCOMIDA,ALTURACOMIDA,"#ff0000");
+function graficarComida() {
+    graficarRectangulo(comidax, comiday, ANCHOCOMIDA, ALTURACOMIDA, "#ff0000");
 }
  
 // FUNCION INICIAR JUEGO
-function iniciarJuego(){
-    
-    // gato al centro del rectangulo
-    gatox = (canvas.width / 2) - (ANCHOGATO / 2);    
+function iniciarJuego() {
+    // GATO AL CENTRO DEL CANVAS
+    gatox = (canvas.width / 2) - (ANCHOGATO / 2);
     gatoy = (canvas.height / 2) - (ALTURAGATO / 2);
  
-    //COMIDA ESQUINA INFERIOR DERECHA
+    // COMIDA ESQUINA INFERIOR DERECHA
     comidax = canvas.width - ANCHOCOMIDA;
     comiday = canvas.height - ALTURACOMIDA;
  
@@ -52,26 +48,28 @@ function iniciarJuego(){
     graficarComida();
 }
  
-function limpiarCanva(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+// LIMPIAR EL CANVAS
+function limpiarCanva() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
  
+// LIMITES DE MOVIMIENTO DEL GATO
 const LIMITE_X = canvas.width - ANCHOGATO;
 const LIMITE_Y = canvas.height - ALTURAGATO;
  
-function moverIzquierda(){
-    if(gatox>0){
-        gatox-=10;
+// MOVIMIENTOS
+function moverIzquierda() {
+    if (gatox > 0) {
+        gatox -= 10;
         limpiarCanva();
         graficarGato();
         graficarComida();
         detectarColision();
     }
-
 }
  
-function moverDerecha(){
-    if (gatox<LIMITE_X){
+function moverDerecha() {
+    if (gatox < LIMITE_X) {
         gatox += 10;
         limpiarCanva();
         graficarGato();
@@ -80,8 +78,8 @@ function moverDerecha(){
     }
 }
  
-function moverArriba(){
-    if(gatoy>0){
+function moverArriba() {
+    if (gatoy > 0) {
         gatoy -= 10;
         limpiarCanva();
         graficarGato();
@@ -90,8 +88,8 @@ function moverArriba(){
     }
 }
  
-function moverAbajo(){
-    if(gatoy<LIMITE_Y){
+function moverAbajo() {
+    if (gatoy < LIMITE_Y) {
         gatoy += 10;
         limpiarCanva();
         graficarGato();
@@ -100,30 +98,33 @@ function moverAbajo(){
     }
 }
  
+// BOTONES DE DIRECCION
 document.getElementById("btnArriba").onclick = () => moverArriba();
 document.getElementById("btnAbajo").onclick = () => moverAbajo();
 document.getElementById("btnIzquierda").onclick = () => moverIzquierda();
 document.getElementById("btnDerecha").onclick = () => moverDerecha();
  
- function detectarColision(){
+// DETECTAR COLISION GATO - COMIDA
+function detectarColision() {
     if (gatox < comidax + ANCHOCOMIDA &&
-        gatox + ANCHOGATO > comidax && 
+        gatox + ANCHOGATO > comidax &&
         gatoy < comiday + ALTURACOMIDA &&
-        gatoy + ALTURAGATO > comiday){
-           comidax = generarAleatorio(0,canvas.width - ANCHOCOMIDA);
-           comiday = generarAleatorio(0,canvas.height - ALTURACOMIDA);
-           puntaje++;
-           mostrarEnSpan("puntos", puntaje);
-        }
- }
-
+        gatoy + ALTURAGATO > comiday) {
+        comidax = generarAleatorio(0, canvas.width - ANCHOCOMIDA);
+        comiday = generarAleatorio(0, canvas.height - ALTURACOMIDA);
+        puntaje++;
+        mostrarEnSpan("puntos", puntaje);
+    }
+}
+ 
+// TEMPORIZADOR
 function restarTiempo() {
     temporizador = setInterval(function () {
         tiempo--;
         mostrarEnSpan('tiempo', tiempo);
-
+ 
         if (tiempo <= 0) {
-            alert("Game Over!")
+            alert("Game Over!");
             clearInterval(temporizador);
         }
         if (puntaje >= 6) {
@@ -132,19 +133,21 @@ function restarTiempo() {
         }
     }, 1000);
 }
-
+ 
+// ARRANCA EL TEMPORIZADOR AL CARGAR LA PAGINA
 if (!(tiempo <= 0)) {
     restarTiempo();
 }
-
+ 
+// REINICIAR JUEGO
 function reiniciar() {
     clearInterval(temporizador);
     puntaje = 0;
-    tiempo = 10;
+    tiempo = 15;
     mostrarEnSpan('puntos', puntaje);
     mostrarEnSpan('tiempo', tiempo);
     limpiarCanva();
-    
+ 
     restarTiempo();
     iniciarJuego();
 }
