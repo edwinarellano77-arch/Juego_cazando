@@ -16,6 +16,7 @@ const ALTURACOMIDA = 30;
 // PUNTAJE Y TIEMPO
 let puntaje = 0;
 let tiempo = 15;
+let tiempoV = 15;
 let temporizador = null;
  
 // FUNCION PRINCIPAL PARA GRAFICAR
@@ -114,7 +115,8 @@ function detectarColision() {
         comiday = generarAleatorio(0, canvas.height - ALTURACOMIDA);
         puntaje++;
         mostrarEnSpan("puntos", puntaje);
-        tiempo=15
+        tiempoV --;
+        tiempo = tiempoV;
     }
 }
  
