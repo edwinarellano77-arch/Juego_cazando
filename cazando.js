@@ -10,6 +10,8 @@ const ANCHOGATO = 50;
 const ALTURAGATO = 50;
  
 // COMIDA
+let imagenComida = new Image();
+imagenComida.src = "COMIDA.png";
 let comidax = 50;
 let comiday = 50;
 const ANCHOCOMIDA = 30;
@@ -34,7 +36,7 @@ function graficarGato() {
  
 // FUNCION PARA GRAFICAR COMIDA
 function graficarComida() {
-    graficarRectangulo(comidax, comiday, ANCHOCOMIDA, ALTURACOMIDA, "#ff0000");
+    ctx.drawImage(imagenComida, comidax, comiday, ANCHOCOMIDA, ALTURACOMIDA);
 }
  
 // FUNCION INICIAR JUEGO
